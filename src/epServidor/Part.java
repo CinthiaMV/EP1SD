@@ -17,7 +17,10 @@ public class Part {
         this.codigo = codigo;
         this.nome = nome;
         this.descricao = descricao;
-        this.subcomponentes = (LinkedList<Pares>) subcomponentes.clone();
+        for(int c = 0; c < subcomponentes.size(); c++){
+            Pares par = new Pares(subcomponentes.get(c).subPart, subcomponentes.get(c).quantidade);
+            this.subcomponentes.add(par);
+        }
     }
     
 }

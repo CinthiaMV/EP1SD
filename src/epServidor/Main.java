@@ -16,6 +16,7 @@ public class Main {
        if(args.length == 0)
            System.out.println("Execute como: java Main <nomeServidor>");
        Gestor gestor = new Gestor();
-       Naming.rebind("http://localhost/"+args[0], gestor);
+       Naming.rebind("rmi://localhost/"+args[0], gestor);
+       gestor.setNome(args[0]);
    } 
 }
