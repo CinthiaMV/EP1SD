@@ -22,9 +22,20 @@ public class Main {
         int codigoCorrente = -1; //inicialmente nao ha part corrente
         boolean achou = false; //variavel que define se a part foi encontrada no repositorio
         Scanner sc = new Scanner(System.in);
-        System.out.println("Digite o nome do servidor:");
-        String servidor = sc.nextLine();
-        Mensageiro gerente = (Mensageiro) Naming.lookup("rmi://localhost/"+servidor);//realiza conexao com servidor por via do rmi
+        Mensageiro gerente = null; 
+        String servidor= null;
+        boolean servfail = true;
+        while(servfail){
+            System.out.println("Digite o nome do servidor:");
+            servidor = sc.nextLine();
+            try{
+                gerente = (Mensageiro) Naming.lookup("rmi://localhost/"+servidor);//realiza conexao com servidor por via do rmi
+                servfail = false;
+            }
+            catch(NotBoundException nb){
+                System.out.println("Servidor inexistente");
+            }
+        }
         System.out.println(gerente.sucesso());
         LinkedList<Pares> subCompCorrentes = new LinkedList<Pares>();
         while(true){ //Permite constante espera de input do usuario
